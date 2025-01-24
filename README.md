@@ -9,16 +9,12 @@ class Book implements Serializable
     String author;
     String isbn;
     boolean isBorrowed;
-
     public Book(String title, String author, String isbn) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.isBorrowed = false; // Default: not borrowed
     }
-
-    
-
     // Method to display book details (for users)
     public void displayDetails() {
         System.out.println("Title: " + title);
@@ -34,7 +30,6 @@ class Library implements Serializable
     private Stack<String> actionStack; // Stack for undo functionality
     private LinkedList<Book> recentBooks; // LinkedList for recently added books
     private Map<String, String> borrowedBooks; // To keep track of who borrowed which book
-
     public Library() 
     {
         bookList = new ArrayList<>();
@@ -54,7 +49,6 @@ class Library implements Serializable
             System.out.println("Error saving library state: " + e.getMessage());
         }
     }
-
     // Load the library state from a file
     public static Library loadFromFile(String filename) 
     {
@@ -67,9 +61,6 @@ class Library implements Serializable
             return new Library();
         }
     }
-
-
-
     // Method to add a book
     public void addBook(String title, String author, String isbn) 
     {
@@ -79,7 +70,6 @@ class Library implements Serializable
         recentBooks.add(book); // Add to recent books
         System.out.println("Book added: " + title);
     }
-
     // Method to remove a book
     public void removeBook(String title) 
     {
@@ -95,7 +85,6 @@ class Library implements Serializable
         }
         System.out.println("Book not found: " + title);
     }
-
     // Method to display all books
     public void displayBooks() 
     {
@@ -115,7 +104,6 @@ class Library implements Serializable
             }
         }
     }
-
     // Method to undo the last action
     public void undo() 
     {
@@ -150,7 +138,6 @@ class Library implements Serializable
             System.out.println("No actions to undo.");
         }
     }
-
     // Method for users to select a book and view details
     public void selectBook(int bookIndex) 
     {
@@ -164,7 +151,6 @@ class Library implements Serializable
             System.out.println("Invalid book selection.");
         }
     }
-
     // Method for users to take a book (borrow it)
     public void takeBook(int bookIndex, String username) 
     {
@@ -187,7 +173,6 @@ class Library implements Serializable
             System.out.println("Invalid book selection.");
         }
     }
-
     // Method for users to return a book
     public void returnBook(int bookIndex, String username) 
     {
@@ -216,13 +201,11 @@ class Admin
 {
     private String username;
     private String password;
-
     public Admin(String username, String password) 
     {
         this.username = username;
         this.password = password;
     }
-
     // Method to authenticate the admin
     public boolean login(String enteredUsername, String enteredPassword) 
     {
@@ -239,14 +222,12 @@ public class Main
     private static boolean isAuthenticated = false;
     private static boolean isAdmin = false;
     private static String username = "";
-
     public static void main(String[] args)
     {
         // Save the library state on exit
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             library.saveToFile(LIBRARY_FILE);
         }));
-
         // Role selection prompt
         boolean check=false;
         while(check==false)
@@ -260,7 +241,6 @@ public class Main
                 System.out.print("Enter your choice: ");
                 int roleChoice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline
-
                 if (roleChoice == 1) 
                 {
                     // Admin login
@@ -271,7 +251,6 @@ public class Main
                         String enteredUsername = scanner.nextLine();
                         System.out.print("Enter password: ");
                         String enteredPassword = scanner.nextLine();
-
                         // Authenticate admin
                         if (admin.login(enteredUsername, enteredPassword)) 
                         {
@@ -285,7 +264,6 @@ public class Main
                             System.out.println("Invalid credentials. Access denied.");
                         }
                     }
-                    
                 } 
                 else if (roleChoice == 2) 
                 {
@@ -312,7 +290,6 @@ public class Main
                 {
                     System.out.println("Invalid choice. Try again.");
                 }
-        
                 if (isAuthenticated) 
                 {
                     // Main menu for admin and user
@@ -331,7 +308,6 @@ public class Main
                             try {
                                 roleChoice = scanner.nextInt();
                                 scanner.nextLine(); // Consume newline
-
                                 switch (roleChoice) 
                                 {
                                     case 1:
@@ -391,7 +367,6 @@ public class Main
                                 System.out.print("Enter your choice: ");
                                 roleChoice = scanner.nextInt();
                                 scanner.nextLine(); // Consume newline
-
                                 switch (roleChoice) 
                                 {
                                     case 1:
